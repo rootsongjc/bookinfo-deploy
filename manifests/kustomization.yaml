@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
 - bookinfo-ns.yaml
 - bookinfo.yaml
+- tsb-resources.yaml
 namespace: bookinfo

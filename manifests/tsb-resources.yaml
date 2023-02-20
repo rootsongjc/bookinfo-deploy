@@ -13,4 +13,16 @@ items:
     namespaceSelector:
       names:
       - "c1/bookinfo"
-
+- apiVersion: gateway.tsb.tetrate.io/v2
+  kind: Group
+  metadata:
+    name: bookinfo-gw
+    annotations:
+      tsb.tetrate.io/organization: tetrate
+      tsb.tetrate.io/tenant: tetrate
+      tsb.tetrate.io/workspace: bookinfo-ws
+  spec:
+    namespaceSelector:
+      names:
+      - "c1/bookinfo"
+    configMode: BRIDGED

@@ -26,3 +26,35 @@ items:
       names:
       - "c1/bookinfo"
     configMode: BRIDGED
+- apiVersion: install.tetrate.io/v1alpha1
+  kind: IngressGateway
+  metadata:
+    name: tsb-gateway-bookinfo
+    namespace: bookinfo
+  spec:
+    kubeSpec:
+      service:
+        type: LoadBalancer
+- apiVersion: gateway.tsb.tetrate.io/v2
+  kind: IngressGateway
+  metadata:
+    name: bookinfo-gw-ingress
+    annotations:
+      tsb.tetrate.io/organization: tetrate
+      tsb.tetrate.io/tenant: tetrate
+      tsb.tetrate.io/workspace: bookinfo-ws
+      tsb.tetrate.io/gatewayGroup: bookinfo-gw
+  spec:
+    workloadSelector:
+      namespace: bookinfo
+      labels:
+        app: tsb-gateway-bookinfo
+    http:
+    - name: bookinfo
+      port: 8080
+      hostname: "bookinfo.tetrate.com"
+      routing:
+        rules:
+        - route:
+            host: "bookinfo/productpage.bookinfo.svc.cluster.local"
+
